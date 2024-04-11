@@ -1,0 +1,122 @@
+package test;
+
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.AfterClass;
+
+import org.openqa.selenium.WebDriver;
+
+import base.ClaseBase;
+import pagesObject.PagesObjectForm;
+import pagesObject.PagesObjectHome;
+import utilidades.ExcelUtilidades;
+import utilidades.GenerarReportePDF;
+import utilidades.MyScreenRecorder;
+//import utilidades.ReadExcelFile;
+//import utilidades.WriteExcelFile;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+import utilidadesExcel.*;
+
+public class Runner {
+
+	// DECLARAR LAS VARIABLES GLOBALES
+	private WebDriver driver;
+	PagesObjectHome pages;
+	PagesObjectForm pagesForm;
+
+	Properties propiedades;
+	//ReadExcelFile leer;
+	//WriteExcelFile escribir;
+	ExcelUtilidades excelUtilidades;
+	ClaseBase claseBase;
+
+	public String nomTest;
+	public File routeFolder;
+	public String path;
+
+	GenerarReportePDF generarReportePDF;
+
+	public String name;
+	public String lastname;
+	public String email;
+	public String phone;
+	public String adress;
+	public String state;
+	public String city;
+
+	@BeforeClass
+	public void beforeClass() {
+
+		// INSTANCIAR CLASE BASE
+		claseBase = new ClaseBase(driver);
+		// INSTANCIAR PAGINA DE HOME
+		pages = new PagesObjectHome(driver);
+		// ISNTANCIAR CONEXION A GOOGLE
+		driver = pages.chromeDriverConnection();
+		// INSTANCIAR PAGESFORM
+		pagesForm = new PagesObjectForm(driver);
+		// INSTANCIAR LAS CLASES DE EXCEL
+		//leer = new ReadExcelFile();
+		//escribir = new WriteExcelFile();
+		// INSTANCIAR PROPIEDADES-PROPERTIES
+		propiedades = new Properties();
+		InputStream entrada = null;
+		try {
+			entrada = new FileInputStream("./propiedades.properties");
+			propiedades.load(entrada);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		// ACCEDER A LA URL
+		pages.urlAccess(propiedades.getProperty("url"));
+		// INSTANCIAR LA CLASE DE GENERAR REPORTES PDF
+		generarReportePDF = new GenerarReportePDF();
+		// ESTABLECER RUTA DE EVIDENCIAS
+		path = propiedades.getProperty("outputFile");
+		// EXTABLECER DONDE SE VA A GUARDAR EL PDF
+		generarReportePDF.setRutaImagen(propiedades.getProperty("rutaImagenReporte"));
+
+	}
+
+	@DataProvider(name = "Datos")
+	public Object [][] datos() throws IOException{
+		Object [][] arreglo = ExcelUtilidades.getTableArray("./Data/prueba.xlsx", "Datos");
+		return arreglo;
+	}
+	
+	@Test(dataProvider = "Datos")
+	public void diligenciarForm(String name, String lastName, String email, String phone, String adress, String	state, String city, String mes,	String anho, String	dia) throws Exception {
+		// OBTENER EL NOMBRE DEL METODO PARA NOMBRAR LA CARPETA DEL VIDEO
+		String nomTest = Thread.currentThread().getStackTrace()[1].getMethodName();
+		// CREAR LA CARPETA DONDE VAMOS A GUARDAR EL VIDEO
+		File rutaFile = claseBase.crearCarpeta(propiedades, nomTest, path);
+		// INICAR GRABADORA DE VIDEO
+		MyScreenRecorder.startRecording(nomTest, rutaFile);
+		// INICAR EVIDENCIA PDF
+		generarReportePDF.crearPlantilla(nomTest, rutaFile);
+		// ENTRAR A FORMS
+		pages.enterAForms(rutaFile);
+		// ENTRAR A PRACTICE
+		pagesForm.enterAPractice(rutaFile);
+		// USAR EL METODO REGISTERFORM
+		pagesForm.registerForm(name, lastName, email, phone, adress, state, city, mes, anho, dia, rutaFile);
+		// FINALIZAR EVIDENCIA PDF
+		generarReportePDF.cerrarPlantilla();
+		// FINALIZAR GRABADORA DE VIDEO
+		MyScreenRecorder.stopRecording();
+	}
+
+	@AfterClass
+	public void afterClass() {
+
+		// CERRAR EL DRIVER CHROME
+		driver.quit();
+	}
+}

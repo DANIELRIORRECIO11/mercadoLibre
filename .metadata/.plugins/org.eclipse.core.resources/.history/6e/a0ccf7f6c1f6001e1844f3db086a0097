@@ -1,0 +1,26 @@
+package pagesObject;
+
+import java.io.File;
+import org.openqa.selenium.WebDriver;
+import mapsObject.MapsObjectsHomeMercadoLibre;
+
+public class PagesObjectHome extends MapsObjectsHomeMercadoLibre {
+
+	//INSTANCIAR CONSTRUCTOR DE LA CLASE
+	public PagesObjectHome(WebDriver driver) {
+		super(driver);
+	}
+		
+	//BUSCAR URL
+	public void urlAccess(String url) {
+		driver.get(url);
+	}
+		
+	//ENTRAR A FORMS
+	public void buscarProducto(String producto, File rutaFile) throws Exception{
+		//ENVIAR LOS COMANDOS DE ACCION AL NAVEGADOR
+		click(barraDeBusqueda, rutaFile);
+		sendKey(producto, barraDeBusqueda, rutaFile);
+		presionarEnter(barraDeBusqueda, rutaFile);
+	}
+}

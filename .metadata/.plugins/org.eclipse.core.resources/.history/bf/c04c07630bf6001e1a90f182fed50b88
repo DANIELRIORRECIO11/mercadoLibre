@@ -1,0 +1,84 @@
+package pagesObject;
+
+import java.io.File;
+import java.util.Properties;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import mapsObject.MapsObjectForm;
+import utilidades.ReadExcelFile;
+
+public class PagesObjectForm extends MapsObjectForm{
+	
+	//INSTANCIAR CONSTRUCTOR DE LA CLASE
+	public PagesObjectForm(WebDriver driver) {
+		super(driver);
+	}
+		
+	//ENTRAR A PRACTICE
+	public void enterAPractice(ReadExcelFile leer, Properties propiedades, String path) throws Exception{
+		//OBTENER EL NOMBRE DEL METODO A EJECUTAR
+		String nomTest = Thread.currentThread().getStackTrace()[1].getMethodName();
+		//CREAR CARPETA PARA ALMACENAMIENTO DE IMAGENES
+		File rutaCapeta = crearCarpeta(propiedades, nomTest, path);
+		//ENVIAMOS LOS COMANDOS DE ACCION AL NAVEGADOR
+		click(linkPractice, rutaCapeta, true);
+		scrollWeb(100, 1);
+		tiempoEspera(2000);
+	}
+	
+	public void registerForm(String name, String lastname, String email, String phone, String adress, String state, String city, ReadExcelFile leer, Properties propiedades, String path) throws InterruptedException{
+		try {
+			//OBTENER EL NOMBRE DEL METODO A EJECUTAR
+			String nomTest = Thread.currentThread().getStackTrace()[1].getMethodName();
+			//CREAR CARPETA PARA ALMACENAMIENTO DE IMAGENES
+			File rutaCarpeta = crearCarpeta(propiedades, nomTest, path);
+			//ENVIAMOS LOS COMANDOS DE ACCION AL NAVEGADOR
+			//ESCRIBIR NOMBRE
+			sendKey(leer.getCellValue(propiedades.getProperty("filePathExcel"), "Datos", 1, 0), inputName, rutaCarpeta);
+			//ESCRIBIR APELLIDO
+			sendKey(leer.getCellValue(propiedades.getProperty("filePathExcel"), "Datos", 1, 1), inputLastName, rutaCarpeta);
+			//ESCRIBIR EMAIL
+			sendKey(leer.getCellValue(propiedades.getProperty("filePathExcel"), "Datos", 1, 2), inputEmail, rutaCarpeta);
+			click(radioGender, rutaCarpeta, true);
+			//ESCRIBIR CELULAR
+			sendKey(leer.getCellValue(propiedades.getProperty("filePathExcel"), "Datos", 1, 3), inputMobile, rutaCarpeta);
+			scrollWeb(10, 100);
+			click(inputDate, rutaCarpeta, true);
+			//SELECCIONAR MES
+			listarTexto(leer.getCellValue(propiedades.getProperty("filePathExcel"), "Datos", 1, 7), inputMes);
+			//SELECCIONAR AÑO
+			listarTexto(leer.getCellValue(propiedades.getProperty("filePathExcel"), "Datos", 1, 8), inputYear);
+			//SELECCIONAR DIA
+			String dia = leer.getCellValue(propiedades.getProperty("filePathExcel"), "Datos", 1, 9);
+			By inputDia = By.xpath("//*[@class='react-datepicker__day react-datepicker__day--0"+dia+"']");
+			click(inputDia, rutaCarpeta, true);
+			click(inputSubjects, rutaCarpeta, true);
+			//ESCRIBIR MATERIA
+			sendKey("Maths",inputSubjects, rutaCarpeta);
+			presionarEnter(inputSubjects, rutaCarpeta);
+			//SELECCIONAR HOBIES
+			click(checkboxHobbies, rutaCarpeta, true);
+			//tiempoEspera(5000);
+			click(inputAddress, rutaCarpeta, true);
+			//ESCRIBIR DIRECCION
+			sendKey(leer.getCellValue(propiedades.getProperty("filePathExcel"), "Datos", 1, 4), inputAddress, rutaCarpeta);
+			click(inputEstado, rutaCarpeta, true);
+			//ESCRIBIR ESTADO
+			sendKey(leer.getCellValue(propiedades.getProperty("filePathExcel"), "Datos", 1, 5), inputEstado, rutaCarpeta);
+			presionarEnter(inputEstado, rutaCarpeta);
+			//ESCRIBIR CIUDAD
+			sendKey(leer.getCellValue(propiedades.getProperty("filePathExcel"), "Datos", 1, 6), inputCiudad, rutaCarpeta);
+			presionarEnter(inputCiudad, rutaCarpeta);
+			//PRESIONAR BOTON SUBMIT
+			click(btnSubmit, rutaCarpeta, true);
+			tiempoEspera(5000);
+			//PRESIONAR BOTON CLOSE
+			click(btnClose, rutaCarpeta, true);
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+}

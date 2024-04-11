@@ -1,0 +1,34 @@
+package mapsObject;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import base.ClaseBase;
+
+public class MapsObjectCuenta extends ClaseBase{
+
+	public MapsObjectCuenta(WebDriver driver) {
+		super(driver);
+	}
+
+	//MAPEAR ELEMENTOS DE FORM - NAVEGADOR LATERAL
+	//protected By linkForms = By.xpath("//*[(text()='Forms')]");
+	protected By linkPractice = By.xpath("//*[(text()='Practice Form')]");
+	
+	//MAPEAR ELEMENTOS DE FORM - FORMULARIO
+	protected By inputName = By.id("firstName");
+	protected By inputLastName = By.id("lastName");
+	protected By inputEmail = By.id("userEmail");
+	protected By radioGender = By.xpath("(//*[@class=\"custom-control custom-radio custom-control-inline\"])[1]");
+	protected By inputMobile = By.id("userNumber");
+	protected By inputDate = By.xpath("//*[@id='dateOfBirthInput']");
+	protected By inputMes = By.xpath("//*[@class='react-datepicker__month-select']");
+	protected By inputYear = By.xpath("//*[@class='react-datepicker__year-select']");
+	protected By inputSubjects = By.id("subjectsInput");
+	protected By checkboxHobbies = By.xpath("//*[@id='hobbies-checkbox-2']/..");
+	protected By inputAddress = By.xpath("//*[@placeholder ='Current Address']");
+	protected By inputEstado = By.xpath("//*[@id='react-select-3-input']");
+	protected By inputCiudad = By.xpath("//*[@id='react-select-4-input']");
+	protected By btnSubmit = By.id("submit");
+	protected By btnClose = By.xpath("//*[@id='closeLargeModal']");
+}

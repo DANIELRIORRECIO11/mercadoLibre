@@ -1,0 +1,22 @@
+package utilidadesExcel;
+
+import java.io.FileInputStream;
+
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+public class ExcelUtilidades {
+	private static XSSFSheet ExcelWSheet;
+	private static XSSFWorkbook ExcelWBook;
+	private static XSSFCell Cell;
+	
+	public static Object[][] getTableArray(String FilePath){
+		String[][] tabArray = null;
+		try {
+			FileInputStream ExcelFile = new FileInputStream(FilePath);
+			
+			
+		}
+	}
+}

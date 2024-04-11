@@ -1,0 +1,76 @@
+package pagesObject;
+
+import java.io.File;
+import java.util.Properties;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import mapsObject.MapsObjectForm;
+
+
+public class PagesObjectForm extends MapsObjectForm{
+	
+	//INSTANCIAR CONSTRUCTOR DE LA CLASE
+	public PagesObjectForm(WebDriver driver) {
+		super(driver);
+	}
+		
+	//ENTRAR A PRACTICE
+	public void enterAPractice(File rutaFile) throws Exception{
+		//ENVIAMOS LOS COMANDOS DE ACCION AL NAVEGADOR
+		click(linkPractice, rutaFile, true);
+		scrollWeb(100, 1);
+		tiempoEspera(2000);
+	}
+	
+	public void registerForm(String name, String lastname, String email, String phone, String adress, String state, String city, String mes, String anho, String dia, Properties propiedades, String path, File rutaFile) throws InterruptedException{
+		try {
+			//ENVIAMOS LOS COMANDOS DE ACCION AL NAVEGADOR
+			//ESCRIBIR NOMBRE
+			sendKey(name, inputName, rutaFile, true);
+			//ESCRIBIR APELLIDO
+			sendKey(lastname, inputLastName, rutaFile, true);
+			//ESCRIBIR EMAIL
+			sendKey(email, inputEmail, rutaFile, true);
+			click(radioGender, rutaFile, true);
+			//ESCRIBIR CELULAR
+			sendKey(email, inputMobile, rutaFile, true);
+			scrollWeb(10, 100);
+			click(inputDate, rutaFile, true);
+			//SELECCIONAR MES
+			listarTexto(mes, inputMes);
+			//SELECCIONAR AÑO
+			listarTexto(anho, inputYear);
+			//SELECCIONAR DIA
+			//String this.dia = dia
+			By inputDia = By.xpath("//*[@class='react-datepicker__day react-datepicker__day--0"+dia+"']");
+			click(inputDia, rutaFile, true);
+			click(inputSubjects, rutaFile, true);
+			//ESCRIBIR MATERIA
+			sendKey("Maths",inputSubjects, rutaFile, true);
+			presionarEnter(inputSubjects, rutaFile);
+			//SELECCIONAR HOBIES
+			click(checkboxHobbies, rutaFile, true);
+			//tiempoEspera(5000);
+			click(inputAddress, rutaFile, true);
+			//ESCRIBIR DIRECCION
+			sendKey(adress, inputAddress, rutaFile, true);
+			click(inputEstado, rutaFile, true);
+			//ESCRIBIR ESTADO
+			sendKey(state, inputEstado, rutaFile, true);
+			presionarEnter(inputEstado, rutaFile);
+			//ESCRIBIR CIUDAD
+			sendKey(city, inputCiudad, rutaFile, true);
+			presionarEnter(inputCiudad, rutaFile);
+			//PRESIONAR BOTON SUBMIT
+			click(btnSubmit, rutaFile, true);
+			tiempoEspera(5000);
+			//PRESIONAR BOTON CLOSE
+			click(btnClose, rutaFile, true);
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+}

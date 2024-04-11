@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2024-04-10T09:31:26 COT" name="Default suite" finished-at="2024-04-10T09:31:39 COT" duration-ms="13759">
+    <groups>
+    </groups>
+    <test started-at="2024-04-10T09:31:26 COT" name="Default test" finished-at="2024-04-10T09:31:39 COT" duration-ms="13759">
+      <class name="test.Runner">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:test.Runner@649bec2e]" started-at="2024-04-10T09:31:26 COT" name="beforeClass" finished-at="2024-04-10T09:31:28 COT" duration-ms="2201" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method signature="buscarProductoML(java.lang.String, java.lang.String)[pri:0, instance:test.Runner@649bec2e]" started-at="2024-04-10T09:31:29 COT" name="buscarProductoML" data-provider="ListaProductos" finished-at="2024-04-10T09:31:39 COT" duration-ms="10644" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[impresora]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[daniel@gmail.com]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- buscarProductoML -->
+        <test-method is-config="true" signature="afterClass()[pri:0, instance:test.Runner@649bec2e]" started-at="2024-04-10T09:31:39 COT" name="afterClass" finished-at="2024-04-10T09:31:39 COT" duration-ms="112" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterClass -->
+      </class> <!-- test.Runner -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

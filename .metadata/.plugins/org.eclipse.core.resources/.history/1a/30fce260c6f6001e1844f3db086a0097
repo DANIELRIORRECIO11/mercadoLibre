@@ -1,0 +1,23 @@
+package mapsObject;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import base.ClaseBase;
+
+public class MapsObjectsHomeMercadoLibre extends ClaseBase {
+
+	//INSTANCIAR CONSTRUCTOR DE LA CLASE
+	public MapsObjectsHomeMercadoLibre(WebDriver driver) {
+		super(driver);
+	}
+	
+	//MAPEAR ELEMENTOS DE HOME
+	protected By barraDeBusqueda = By.xpath("//*[@id='cb1-edit']");
+	protected By primerResultadoDeBusqueda = By.xpath("//*[@class='ui-search-layout__item shops__layout-item ui-search-layout__stack'][3]");
+
+	
+	//*[@class=\"ui-search-layout__item shops__layout-item ui-search-layout__stack\"][3]");
+	//*[@class=\"ui-search-layout__item shops__layout-item ui-search-layout__stack"]}
+	//*[@class="ui-search-layout__item shops__layout-item ui-search-layout__stack"] @class="ui-search-result__image"]
+}

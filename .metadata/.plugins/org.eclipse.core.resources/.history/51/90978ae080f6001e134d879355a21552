@@ -1,0 +1,84 @@
+package pagesObject;
+
+import java.io.File;
+import java.util.Properties;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import mapsObject.MapsObjectForm;
+
+
+public class PagesObjectForm extends MapsObjectForm{
+	
+	//INSTANCIAR CONSTRUCTOR DE LA CLASE
+	public PagesObjectForm(WebDriver driver) {
+		super(driver);
+	}
+		
+	//ENTRAR A PRACTICE
+	public void enterAPractice(Properties propiedades, String path) throws Exception{
+		//OBTENER EL NOMBRE DEL METODO A EJECUTAR
+		String nomTest = Thread.currentThread().getStackTrace()[1].getMethodName();
+		//CREAR CARPETA PARA ALMACENAMIENTO DE IMAGENES
+		File rutaCapeta = crearCarpeta(propiedades, nomTest, path);
+		//ENVIAMOS LOS COMANDOS DE ACCION AL NAVEGADOR
+		click(linkPractice, rutaCapeta, true);
+		scrollWeb(100, 1);
+		tiempoEspera(2000);
+	}
+	
+	public void registerForm(String name, String lastname, String email, String phone, String adress, String state, String city, String mes, String anho, String dia, Properties propiedades, String path) throws InterruptedException{
+		try {
+			//OBTENER EL NOMBRE DEL METODO A EJECUTAR
+			String nomTest = Thread.currentThread().getStackTrace()[1].getMethodName();
+			//CREAR CARPETA PARA ALMACENAMIENTO DE IMAGENES
+			File rutaCarpeta = crearCarpeta(propiedades, nomTest, path);
+			//ENVIAMOS LOS COMANDOS DE ACCION AL NAVEGADOR
+			//ESCRIBIR NOMBRE
+			sendKey(name, inputName, rutaCarpeta, true);
+			//ESCRIBIR APELLIDO
+			sendKey(lastname, inputLastName, rutaCarpeta, true);
+			//ESCRIBIR EMAIL
+			sendKey(email, inputEmail, rutaCarpeta, true);
+			click(radioGender, rutaCarpeta, true);
+			//ESCRIBIR CELULAR
+			sendKey(email, inputMobile, rutaCarpeta, true);
+			scrollWeb(10, 100);
+			click(inputDate, rutaCarpeta, true);
+			//SELECCIONAR MES
+			listarTexto(mes, inputMes);
+			//SELECCIONAR AÑO
+			listarTexto(anho, inputYear);
+			//SELECCIONAR DIA
+			//String this.dia = dia
+			By inputDia = By.xpath("//*[@class='react-datepicker__day react-datepicker__day--0"+dia+"']");
+			click(inputDia, rutaCarpeta, true);
+			click(inputSubjects, rutaCarpeta, true);
+			//ESCRIBIR MATERIA
+			sendKey("Maths",inputSubjects, rutaCarpeta, true);
+			presionarEnter(inputSubjects, rutaCarpeta);
+			//SELECCIONAR HOBIES
+			click(checkboxHobbies, rutaCarpeta, true);
+			//tiempoEspera(5000);
+			click(inputAddress, rutaCarpeta, true);
+			//ESCRIBIR DIRECCION
+			sendKey(adress, inputAddress, rutaCarpeta, true);
+			click(inputEstado, rutaCarpeta, true);
+			//ESCRIBIR ESTADO
+			sendKey(state, inputEstado, rutaCarpeta, true);
+			presionarEnter(inputEstado, rutaCarpeta);
+			//ESCRIBIR CIUDAD
+			sendKey(city, inputCiudad, rutaCarpeta, true);
+			presionarEnter(inputCiudad, rutaCarpeta);
+			//PRESIONAR BOTON SUBMIT
+			click(btnSubmit, rutaCarpeta, true);
+			tiempoEspera(5000);
+			//PRESIONAR BOTON CLOSE
+			click(btnClose, rutaCarpeta, true);
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+}

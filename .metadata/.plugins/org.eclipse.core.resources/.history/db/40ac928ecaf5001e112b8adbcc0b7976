@@ -1,0 +1,9 @@
+package mapsObject;
+
+import org.testng.annotations.Test;
+
+public class MapsObjectAlerts {
+  @Test
+  public void f() {
+  }
+}

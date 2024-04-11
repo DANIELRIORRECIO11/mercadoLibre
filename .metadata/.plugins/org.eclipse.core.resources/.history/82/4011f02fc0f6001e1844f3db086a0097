@@ -1,0 +1,17 @@
+package mapsObject;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import base.ClaseBase;
+
+public class MapsObjectsHomeMercadoLibre extends ClaseBase {
+
+	//INSTANCIAR CONSTRUCTOR DE LA CLASE
+	public MapsObjectsHomeMercadoLibre(WebDriver driver) {
+		super(driver);
+	}
+	
+	//MAPEAR ELEMENTOS DE HOME
+	protected By barraDeBusqueda = By.xpath("//*[@class='card-body']//h5[contains(text(), 'Forms')]");
+}

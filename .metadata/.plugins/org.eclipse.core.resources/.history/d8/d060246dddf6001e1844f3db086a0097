@@ -1,0 +1,23 @@
+package mapsObject;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import base.ClaseBase;
+
+public class MapsObjectAlerts extends ClaseBase{
+
+	public MapsObjectAlerts(WebDriver driver) {
+		super(driver);
+	}
+
+	//MAPEAR ELEMENTOS DE ALERTS - NAVEGADOR LATERAL
+	//protected By linkForms = By.xpath("//*[(text()='Alerts, Frame & Windows')]");
+	protected By linkAlerts = By.xpath("//*[@class = 'text'  and (text()='Alerts')]");
+	
+	//MAPEAR ELEMENTOS DE ALERTS - BOTONES
+	protected By btnClickToSeeAlert = By.xpath("//*[@id='alertButton']");
+	protected By btnAlertWillAppearAfter5Seconds = By.xpath("//*[@id='timerAlertButton']");
+	protected By btnConfirmBoxWillAppear = By.xpath("//*[@id='confirmButton']");
+	protected By btnPromptBoxWillAppear = By.xpath("//*[@id='promtButton']");
+}

@@ -1,0 +1,63 @@
+package pagesObject;
+
+import static org.junit.Assert.fail;
+
+import java.io.File;
+import java.util.Properties;
+
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.WebDriver;
+
+import mapsObject.MapsObjectAlerts;
+import utilidades.ReadExcelFile;
+
+public class PagesObjectAlerts extends MapsObjectAlerts{
+	
+	//INSTANCIAR CONSTRUCTOR DE LA CLASE
+	public PagesObjectAlerts(WebDriver driver) {
+		super(driver);
+	}
+		
+	//ENTRAR A PRACTICE
+	public void enterAAlerts(File rutaFile) throws Exception{
+		//ENVIAMOS LOS COMANDOS DE ACCION AL NAVEGADOR
+		click(linkAlerts, rutaFile);
+		scrollWeb(100, 1);
+		tiempoEspera(2000);
+	}
+	
+	public void presionarBotones(String name, File rutaFile) throws InterruptedException{
+		try {
+			//ENVIAMOS LOS COMANDOS DE ACCION AL NAVEGADOR
+			//PRIMER BOTON
+			click(btnClickToSeeAlert, rutaFile);
+			tiempoEspera(5000);
+			driver.switchTo().alert().accept();
+			//SEGUNDO BOTON
+			click(btnAlertWillAppearAfter5Seconds, rutaFile);
+			tiempoEspera(6000);
+			driver.switchTo().alert().accept();  
+			//TERCER BOTON
+			click(btnConfirmBoxWillAppear, rutaFile);
+			tiempoEspera(5000);
+			driver.switchTo().alert().accept();
+			click(btnConfirmBoxWillAppear, rutaFile);
+			tiempoEspera(5000);
+			driver.switchTo().alert().dismiss();
+			//tiempoEspera(5000);
+			//CUARTO BOTON
+			click(btnPromptBoxWillAppear, rutaFile);
+			tiempoEspera(5000);
+			Alert alert = driver.switchTo().alert();
+			String textoExcel = name;
+			alert.sendKeys(textoExcel);
+			alert.accept();
+			tiempoEspera(5000);
+			//captureScreen(rutaCarpeta, btnAlertWillAppearAfter5Seconds, "Si");
+			//toString(leer.getCellValue(propiedades.getProperty("filePathExcel"), "Datos", 1, 0,)
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			fail("El metodo fallo por: " + e.getMessage());
+		}
+	}
+}

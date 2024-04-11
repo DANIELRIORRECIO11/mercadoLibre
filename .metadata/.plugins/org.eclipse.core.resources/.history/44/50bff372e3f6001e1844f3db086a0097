@@ -1,0 +1,17 @@
+package mapsObject;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import base.ClaseBase;
+
+public class MapsObjectCuenta extends ClaseBase{
+
+	public MapsObjectCuenta(WebDriver driver) {
+		super(driver);
+	}
+
+	//MAPEAR ELEMENTOS DE FORM - FORMULARIO
+	protected By btnCrearCuenta = By.id("firstName");
+
+}

@@ -1,0 +1,41 @@
+package pagesObject;
+
+import java.io.File;
+import java.util.Properties;
+
+import org.openqa.selenium.WebDriver;
+
+import mapsObject.MapsObjectsHomeMercadoLibre;
+//import utilidades.ReadExcelFile;
+
+public class PagesObjectHome extends MapsObjectsHomeMercadoLibre {
+
+	//INSTANCIAR CONSTRUCTOR DE LA CLASE
+	public PagesObjectHome(WebDriver driver) {
+		super(driver);
+	}
+		
+	//BUSCAR URL
+	public void urlAccess(String url) {
+		driver.get(url);
+	}
+		
+	//ENTRAR A FORMS
+	public void enterAForms(File rutaFile) throws Exception{
+		//ENVIAR LOS COMANDOS DE ACCION AL NAVEGADOR
+		scrollWeb(100, 1);
+		click(linkForms, rutaFile);
+	}
+	//ENTRAR A ALERTS, FRAME $ WINDOWS
+	public void enterAAlertsFrameYWindow(File rutaFile) throws Exception{
+		//ENVIAR LOS COMANDOS DE ACCION AL NAVEGADOR
+		scrollWeb(100, 1);
+		click(linkAlertFrameYWindow, rutaFile);
+	}
+	//ENTRAR A BOOK STORE APLICATION
+	public void enterABookStoreAplication(File rutaFile) throws Exception{
+		//ENVIAR LOS COMANDOS DE ACCION AL NAVEGADOR
+		scrollWeb(100, 1);
+		click(linkBookStoreAplication, rutaFile);
+	}
+}
